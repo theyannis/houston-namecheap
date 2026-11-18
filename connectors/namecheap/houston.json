@@ -1,27 +1,29 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "name": "Namecheap",
   "files": [
     "connector.luau"
   ],
   "icon": "icon.svg",
-  "config": {
-    "access": {
-      "default": "read-only",
+  "access": [
+    {
+      "name": "data",
       "label": "Access",
-      "options": [
+      "description": "Write also lets agents add, update and remove DNS records.",
+      "levels": [
         {
-          "label": "Read-only",
-          "value": "read-only"
+          "value": "read",
+          "label": "Read"
         },
         {
-          "label": "Read and change DNS records",
-          "value": "read-write"
+          "value": "write",
+          "label": "Write"
         }
       ],
-      "order": 1,
-      "type": "string"
-    },
+      "default": "read"
+    }
+  ],
+  "config": {
     "api_host": {
       "default": "api.namecheap.com",
       "description": "Use Sandbox only with an account created on sandbox.namecheap.com.",
@@ -36,7 +38,7 @@
           "value": "api.sandbox.namecheap.com"
         }
       ],
-      "order": 2,
+      "order": 1,
       "required": true,
       "type": "string"
     },
@@ -44,7 +46,7 @@
       "description": "The username you sign in to Namecheap with.",
       "label": "Namecheap username",
       "max_length": 64,
-      "order": 3,
+      "order": 2,
       "required": true,
       "type": "string"
     },
@@ -52,7 +54,7 @@
       "description": "The IPv4 address Houston connects to Namecheap from. Whitelist the same address in Namecheap's API settings.",
       "label": "Whitelisted IP address",
       "max_length": 15,
-      "order": 4,
+      "order": 3,
       "placeholder": "203.0.113.7",
       "required": true,
       "type": "string"
@@ -101,7 +103,7 @@
       }
     },
     {
-      "if": "{{ is config.access \"read-write\" }}",
+      "if": "{{ allows access.data \"write\" }}",
       "match": {
         "protocol": "http",
         "host": [

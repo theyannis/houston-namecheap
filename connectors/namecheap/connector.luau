@@ -819,7 +819,7 @@ local exports: {[string]: any} = {
 	getNameservers = getNameservers,
 	getDnsRecords = getDnsRecords,
 }
-if config.access == "read-write" then
+if houston.allows("data:write") then
 	exports.changeDnsRecords = changeDnsRecords
 end
 

@@ -1,4 +1,4 @@
--- Read-only connections export the reads alone, send GET requests with exact parameters, and never write.
+-- Read connections export the reads alone, send GET requests with exact parameters, and never write.
 local function xml(body: string): string
 	return '<?xml version="1.0" encoding="utf-8"?>\r\n<ApiResponse Status="OK" xmlns="http://api.namecheap.com/xml.response">'
 		.. '<Errors /><Warnings /><RequestedCommand>namecheap.domains.getList</RequestedCommand>'
@@ -17,7 +17,7 @@ local BASE = "https://api.namecheap.com/xml.response?ApiUser=ada&UserName=ada&Cl
 return {
 	scenario = {publisher = {}, auth_method = "token", auth_config = {token = "fixture-key"},
 		config = {api_host = "api.namecheap.com", username = "ada", client_ip = "203.0.113.7"}},
-	config = {access = "read-only"},
+	access = {data = "read"},
 	configure = function()
 		requests = {}
 		nextBody = PAGE
@@ -27,7 +27,7 @@ return {
 		end}
 	end,
 	run = function(namecheap)
-		assert(namecheap.changeDnsRecords == nil, "read-only access must not export changeDnsRecords")
+		assert(namecheap.changeDnsRecords == nil, "Read access must not export changeDnsRecords")
 		for _, name in {"listDomains", "getDomain", "checkAvailability", "getNameservers", "getDnsRecords"} do
 			assert(type(namecheap[name]) == "function", "missing read " .. name)
 		end
@@ -67,7 +67,7 @@ return {
 		rejects(function() namecheap.checkAvailability(many) end, "1 to 50 domain names")
 
 		for _, req2 in requests do
-			assert(req2.method == "GET", "read-only connections only send GET")
+			assert(req2.method == "GET", "Read connections only send GET")
 		end
 	end,
 }

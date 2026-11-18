@@ -16,7 +16,7 @@ their DNS.
 ## Manage DNS records
 
 - Read every DNS record of a domain that uses Namecheap DNS.
-- With **Read and change DNS records** access, agents can add, update and
+- With **Write** access, agents can add, update and
   remove records, for example to point a subdomain at a new host or add a
   verification TXT record. Every other record is kept, and each change is read
   back to confirm it was saved.

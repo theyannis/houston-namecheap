@@ -37,7 +37,7 @@ return {
 		end}
 	end,
 	run = function(namecheap)
-		assert(namecheap.changeDnsRecords == nil, "access defaults to read-only")
+		assert(namecheap.changeDnsRecords == nil, "access defaults to Read")
 
 		local zone = namecheap.getDnsRecords("Example.CO.UK.")
 		assert(string.find(requests[1].url, "&Command=namecheap.domains.dns.getHosts&SLD=example&TLD=co.uk", 1, true), requests[1].url)

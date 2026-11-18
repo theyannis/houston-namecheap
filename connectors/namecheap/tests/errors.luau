@@ -6,7 +6,7 @@ end
 return {
 	scenario = {publisher = {}, auth_method = "token", auth_config = {token = "fixture-key"},
 		config = {api_host = "api.namecheap.com", username = "ada", client_ip = "203.0.113.7"}},
-	config = {access = "read-only"},
+	access = {data = "read"},
 	configure = function()
 		calls = 0
 		status = 200

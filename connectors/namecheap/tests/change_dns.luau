@@ -34,7 +34,7 @@ local BASE = "https://api.namecheap.com/xml.response?ApiUser=ada&UserName=ada&Cl
 return {
 	scenario = {publisher = {}, auth_method = "token", auth_config = {token = "fixture-key"},
 		config = {api_host = "api.namecheap.com", username = "ada", client_ip = "203.0.113.7"}},
-	config = {access = "read-write"},
+	access = {data = "write"},
 	configure = function()
 		requests = {}
 		zone = {}

@@ -24,8 +24,8 @@ Your API key stays on the Houston server.
 
 ### Access levels
 
-**Read-only** lets agents read your domains and DNS records. **Read and change
-DNS records** also lets them add, update and remove DNS records. Neither level
+**Read** lets agents read your domains and DNS records. **Write** also lets them
+add, update and remove DNS records. Neither level
 can register, renew or transfer domains, or change nameservers, contacts or
 privacy settings.
 
